@@ -1,13 +1,15 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "space-invaders-video-game-pong-space-invaders-png-clip-art.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "space-invaders-video-game-pong-space-invaders-png-clip-art (1).png",
       "scale" : "3x"
     },
     {
