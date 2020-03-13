@@ -15,14 +15,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Destroyed" translatesAutoresizingMaskIntoConstraints="NO" id="fcb-Fo-5z3">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="XbU-2Y-G8V">
                                 <rect key="frame" x="164" y="522" width="86" height="400"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Destroyed" translatesAutoresizingMaskIntoConstraints="NO" id="fcb-Fo-5z3">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9g-JG-oxY">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="SCORE:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9g-JG-oxY">
                                 <rect key="frame" x="4" y="48" width="66" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,19 +34,37 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LvL:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcc-Mj-nnU">
+                                <rect key="frame" x="314" y="48" width="35" height="23"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Cg-Wb-hVM">
+                                <rect key="frame" x="353" y="48" width="50" height="23"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fcb-Fo-5z3" secondAttribute="bottom" id="3YF-wt-Bub"/>
                             <constraint firstItem="fcb-Fo-5z3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="5AE-ha-0wa"/>
+                            <constraint firstItem="pcc-Mj-nnU" firstAttribute="baseline" secondItem="EqE-ix-9HV" secondAttribute="baseline" id="Fmf-0v-TNd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fcb-Fo-5z3" secondAttribute="trailing" id="Gve-LY-L9E"/>
                             <constraint firstItem="g9g-JG-oxY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="PxC-sM-RZB"/>
                             <constraint firstItem="EqE-ix-9HV" firstAttribute="top" secondItem="g9g-JG-oxY" secondAttribute="top" id="W56-AG-Dpp"/>
+                            <constraint firstItem="7Cg-Wb-hVM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EqE-ix-9HV" secondAttribute="trailing" constant="8" symbolic="YES" id="Xe2-uM-J2L"/>
+                            <constraint firstItem="pcc-Mj-nnU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EqE-ix-9HV" secondAttribute="trailing" constant="8" symbolic="YES" id="hp4-im-Guf"/>
                             <constraint firstItem="EqE-ix-9HV" firstAttribute="leading" secondItem="g9g-JG-oxY" secondAttribute="trailing" constant="8" id="jGm-ao-ewE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EqE-ix-9HV" secondAttribute="trailing" symbolic="YES" id="jaq-ZL-on0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pcc-Mj-nnU" secondAttribute="trailing" constant="65" id="owM-EO-BZc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Cg-Wb-hVM" secondAttribute="trailing" constant="11" id="p8d-80-Ncd"/>
                             <constraint firstItem="g9g-JG-oxY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="4" id="poQ-60-O66"/>
                             <constraint firstItem="fcb-Fo-5z3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="soD-pB-Yha"/>
+                            <constraint firstItem="pcc-Mj-nnU" firstAttribute="baseline" secondItem="7Cg-Wb-hVM" secondAttribute="baseline" id="w1T-dv-M3R"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <connections>
@@ -56,6 +74,7 @@
                     <connections>
                         <outlet property="destroyed" destination="fcb-Fo-5z3" id="eh5-bP-nmT"/>
                         <outlet property="hit" destination="Qz2-xE-2Ep" id="Gxq-Lb-qih"/>
+                        <outlet property="lvlscore" destination="7Cg-Wb-hVM" id="Dz0-Vc-PWA"/>
                         <outlet property="player" destination="XbU-2Y-G8V" id="az0-2W-h6g"/>
                         <outlet property="score" destination="EqE-ix-9HV" id="rrh-DN-Noq"/>
                     </connections>

@@ -10,18 +10,20 @@ import UIKit
 import CoreMotion
 
 
+
+
 class ViewController: UIViewController {
 
     var t : Timer?
-    
     var enemies = [[Enemy]]()
-    
+    var aliveEnemy : Int = 15
     
     var xchange :CGFloat = -1
     var ychange :CGFloat = 0
     
     let motion = CMMotionManager()
     
+    @IBOutlet weak var lvlscore: UILabel!
     @IBOutlet weak var destroyed: UIImageView!
     @IBOutlet weak var player: UIImageView!
     @IBOutlet var hit: UITapGestureRecognizer!
@@ -36,13 +38,25 @@ class ViewController: UIViewController {
  
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
+        lvlnumber = UserDefaults.standard.integer(forKey: "lvlnumber")
+        scoreNumber = UserDefaults.standard.integer(forKey: "scoreNumber")
+        isDie = UserDefaults.standard.bool(forKey: "isDie")
+        
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = #imageLiteral(resourceName: "background")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        self.view.insertSubview(backgroundImage, at: 0)
+        
         startGame()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(false)
     }
     
     var playerBullets = [UIImageView]()
     var shotCoolDown = 30
     var enemyBullets = [UIImageView]()
-    var shotEnemyCoolDown = 30
+    var shotEnemyCoolDown = 30.0
     
     @IBAction func tap(_ sender: Any) {
         if isDie {
@@ -61,22 +75,23 @@ class ViewController: UIViewController {
     }
     
     
-    var isDie : Bool = false
+    var isDie : Bool = true
     
     func startGame()  {
-        
+
         if isDie {
             scoreNumber = 0
             score.text = "0"
             lvlnumber = 1
+            lvlscore.text = "1"
+            
         }
+        else {
+            lvlscore.text = String(lvlnumber)
+            score.text = String(scoreNumber)
+        }
+        aliveEnemy = 15
         isDie = false
-        
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = #imageLiteral(resourceName: "background")
-        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-        self.view.insertSubview(backgroundImage, at: 0)
-        
         for (number, _) in enemyBullets.enumerated() {
             enemyBullets[number].removeFromSuperview()
         }
@@ -122,11 +137,11 @@ class ViewController: UIViewController {
     }
     
     @objc func draw()  {
-        
+        //if lvlnumber == 100 {drawMultik()}
         shotCoolDown += 1
-        shotEnemyCoolDown += 1
+        shotEnemyCoolDown += sqrt(Double(lvlnumber))
         
-        if shotEnemyCoolDown >= 60 {
+        if shotEnemyCoolDown >= 180 {
             let randx = Int.random(in: 0...4)
             let randy = Int.random(in: 0...2)
             if enemies[randx][randy].isHidden==false {
@@ -181,6 +196,7 @@ class ViewController: UIViewController {
                     destroyed.isHidden = false
                     t?.invalidate()
                     isDie = true
+                    UserDefaults.standard.set(isDie, forKey: "isDie")
                 }
             }
         }
@@ -193,21 +209,36 @@ class ViewController: UIViewController {
         }
         ychange = 0
         let enemyPos = enemies[0][2].frame.origin.y + enemies[0][2].frame.height
-        for (number, item) in playerBullets.enumerated(){
+        outer: for (number, item) in playerBullets.enumerated(){
             item.frame.origin.y -= 10
             if item.frame.origin.y < -50 {
                 playerBullets[number].removeFromSuperview()
                 playerBullets.remove(at: number)
-            }
-            if enemyPos >= item.frame.origin.y {
-                for i in 0...4 {
-                    for j in 0...2 {
-                        if (item.frame.intersects(enemies[i][j].frame) && enemies[i][j].isHidden==false) {
-                            playerBullets[number].removeFromSuperview()
-                            playerBullets.remove(at: number)
-                            enemies[i][j].isHidden = true
-                            scoreNumber += Int(10 * sqrt(Double(lvlnumber)))
-                            score.text = String(scoreNumber)
+            } else {
+                if enemyPos >= item.frame.origin.y {
+                    inner : for i in 0...4 {
+                        for j in 0...2 {
+                            if (item.frame.intersects(enemies[i][j].frame) && enemies[i][j].isHidden==false) {
+                                playerBullets[number].removeFromSuperview()
+                                playerBullets.remove(at: number)
+                                enemies[i][j].isHidden = true
+                                scoreNumber += Int(10 * sqrt(Double(lvlnumber)))
+                                score.text = String(scoreNumber)
+                                aliveEnemy -= 1
+                            
+                                if aliveEnemy == 0 {
+                                    aliveEnemy = 15
+                                    t?.invalidate()
+                                    isDie = false
+                                    lvlnumber += 1
+                                    UserDefaults.standard.set(isDie, forKey: "isDie")
+                                    UserDefaults.standard.set(scoreNumber, forKey: "scoreNumber")
+                                    UserDefaults.standard.set(lvlnumber, forKey: "lvlnumber")
+                                    startGame()
+                                    break outer
+                                }
+                                break inner
+                            }
                         }
                     }
                 }
