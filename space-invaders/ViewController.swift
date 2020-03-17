@@ -23,24 +23,25 @@ class ViewController: UIViewController {
     
     let motion = CMMotionManager()
     
+    @IBOutlet weak var bestScore: UILabel!
     @IBOutlet weak var lvlscore: UILabel!
     @IBOutlet weak var destroyed: UIImageView!
     @IBOutlet weak var player: UIImageView!
     @IBOutlet var hit: UITapGestureRecognizer!
     @IBOutlet weak var score: UILabel!
+    @IBOutlet weak var bestScoreLabel: UILabel!
     
-    var scoreNumber : Int = 0
-    var lvlnumber : Int = 0
     
-    override func viewDidLoad() {
-        // Do any additional setup after loading the view.
-    }
+    var playerBullets = [UIImageView]()
+    var shotCoolDown = 30
+    var enemyBullets = [UIImageView]()
+    var shotEnemyCoolDown = 30.0
+    var game = Game()
+    
  
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
-        lvlnumber = UserDefaults.standard.integer(forKey: "lvlnumber")
-        scoreNumber = UserDefaults.standard.integer(forKey: "scoreNumber")
-        isDie = UserDefaults.standard.bool(forKey: "isDie")
+        super.viewDidAppear(animated)
+        
         
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = #imageLiteral(resourceName: "background")
@@ -49,17 +50,10 @@ class ViewController: UIViewController {
         
         startGame()
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(false)
-    }
     
-    var playerBullets = [UIImageView]()
-    var shotCoolDown = 30
-    var enemyBullets = [UIImageView]()
-    var shotEnemyCoolDown = 30.0
     
     @IBAction func tap(_ sender: Any) {
-        if isDie {
+        if game.getIsDie() {
             startGame()
         }else{
         if shotCoolDown > 30 {
@@ -75,23 +69,23 @@ class ViewController: UIViewController {
     }
     
     
-    var isDie : Bool = true
+    
     
     func startGame()  {
 
-        if isDie {
-            scoreNumber = 0
+        if game.getIsDie() {
+            game.setScoreNumber(newScore: 0)
             score.text = "0"
-            lvlnumber = 1
+            game.setLvlNumber(newLvl: 1)
             lvlscore.text = "1"
             
         }
         else {
-            lvlscore.text = String(lvlnumber)
-            score.text = String(scoreNumber)
+            lvlscore.text = String(game.getLVL())
+            score.text = String(game.getScore())
         }
         aliveEnemy = 15
-        isDie = false
+        game.setStatus(status: false)
         for (number, _) in enemyBullets.enumerated() {
             enemyBullets[number].removeFromSuperview()
         }
@@ -104,7 +98,8 @@ class ViewController: UIViewController {
         enemyBullets.removeAll()
         
         
-        
+        bestScoreLabel.isHidden = true
+        bestScore.isHidden = true
         destroyed.isHidden = true
         
         let const = CGRect(x: view.frame.width * 0.4 , y: view.frame.height - 0.2 * view.frame.width - (1/11) * view.frame.width, width: 0.2 * view.frame.width , height:  0.2 * view.frame.width)
@@ -132,14 +127,27 @@ class ViewController: UIViewController {
                 }
             }
         }
-        t = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(draw), userInfo: nil, repeats: true)
+        startTimer()
+        //t = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(draw), userInfo: nil, repeats: true)
         
+    }
+    
+    @objc func startTimer (){
+        let t0 = mach_absolute_time()
+        
+        if game.getIsDie() == false{
+            draw()
+            let t1 = mach_absolute_time()
+            if (Double(t0/1000000000) + Double(1.0/60.0) - Double(t1/1000000000)>0) {
+            perform(#selector(startTimer), with: nil, afterDelay: Double(t0/1000000000) + Double(1.0/60.0) - Double(t1/1000000000))
+            } else {startTimer()}
+        }
     }
     
     @objc func draw()  {
         //if lvlnumber == 100 {drawMultik()}
         shotCoolDown += 1
-        shotEnemyCoolDown += sqrt(Double(lvlnumber))
+        shotEnemyCoolDown += sqrt(Double(game.getLVL()))
         
         if shotEnemyCoolDown >= 180 {
             let randx = Int.random(in: 0...4)
@@ -169,9 +177,14 @@ class ViewController: UIViewController {
                 }
             }
             if isIntersect {
+                
+                game.updateBestScore()
+                bestScore.isHidden = false
+                bestScore.text = String(game.getBestScore())
+                bestScoreLabel.isHidden = false
                 destroyed.isHidden = false
                 t?.invalidate()
-                isDie = true
+                game.setStatus(status: false)
             }
         }
         for i in 0...4{
@@ -193,10 +206,14 @@ class ViewController: UIViewController {
             }
             if item.frame.origin.y - player.frame.height*0.3 > player.frame.origin.y{
                 if (item.frame.intersects(player.frame)) {
+                    
+                    game.updateBestScore()
+                    bestScore.text = String(game.getBestScore())
+                    bestScoreLabel.isHidden = false
+                    bestScore.isHidden = false
                     destroyed.isHidden = false
                     t?.invalidate()
-                    isDie = true
-                    UserDefaults.standard.set(isDie, forKey: "isDie")
+                    game.setStatus(status: true)
                 }
             }
         }
@@ -222,18 +239,17 @@ class ViewController: UIViewController {
                                 playerBullets[number].removeFromSuperview()
                                 playerBullets.remove(at: number)
                                 enemies[i][j].isHidden = true
-                                scoreNumber += Int(10 * sqrt(Double(lvlnumber)))
-                                score.text = String(scoreNumber)
+                                game.updateScore()
+                                score.text = String(game.getScore())
                                 aliveEnemy -= 1
                             
                                 if aliveEnemy == 0 {
                                     aliveEnemy = 15
                                     t?.invalidate()
-                                    isDie = false
-                                    lvlnumber += 1
-                                    UserDefaults.standard.set(isDie, forKey: "isDie")
-                                    UserDefaults.standard.set(scoreNumber, forKey: "scoreNumber")
-                                    UserDefaults.standard.set(lvlnumber, forKey: "lvlnumber")
+                                    game.setStatus(status: false)
+                                    game.setLvlNumber(newLvl: game.getLVL()+1)
+                                    game.saveLVL()
+                                    game.saveScore()
                                     startGame()
                                     break outer
                                 }

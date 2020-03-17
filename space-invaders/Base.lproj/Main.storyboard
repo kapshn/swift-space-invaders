@@ -23,29 +23,50 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="SCORE:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9g-JG-oxY">
-                                <rect key="frame" x="4" y="48" width="66" height="23"/>
+                                <rect key="frame" x="4" y="48" width="66" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqE-ix-9HV">
-                                <rect key="frame" x="78" y="48" width="50" height="23"/>
+                                <rect key="frame" x="78" y="48" width="49.5" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LvL:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcc-Mj-nnU">
-                                <rect key="frame" x="314" y="48" width="35" height="23"/>
+                                <rect key="frame" x="314" y="48" width="35" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Cg-Wb-hVM">
-                                <rect key="frame" x="353" y="48" width="50" height="23"/>
+                                <rect key="frame" x="353.5" y="48" width="49.5" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mqm-IW-8Ib">
+                                <rect key="frame" x="131" y="522" width="153" height="22.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best score: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yh8-0n-prT">
+                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEC-5z-au9">
+                                        <rect key="frame" x="103.5" y="0.0" width="49.5" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="153" id="Gt1-Su-oeA"/>
+                                    <constraint firstAttribute="height" constant="22.5" id="nAx-H5-Nl1"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -58,11 +79,13 @@
                             <constraint firstItem="EqE-ix-9HV" firstAttribute="top" secondItem="g9g-JG-oxY" secondAttribute="top" id="W56-AG-Dpp"/>
                             <constraint firstItem="7Cg-Wb-hVM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EqE-ix-9HV" secondAttribute="trailing" constant="8" symbolic="YES" id="Xe2-uM-J2L"/>
                             <constraint firstItem="pcc-Mj-nnU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EqE-ix-9HV" secondAttribute="trailing" constant="8" symbolic="YES" id="hp4-im-Guf"/>
+                            <constraint firstItem="Mqm-IW-8Ib" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="131" id="ht9-Q2-pDR"/>
                             <constraint firstItem="EqE-ix-9HV" firstAttribute="leading" secondItem="g9g-JG-oxY" secondAttribute="trailing" constant="8" id="jGm-ao-ewE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EqE-ix-9HV" secondAttribute="trailing" symbolic="YES" id="jaq-ZL-on0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pcc-Mj-nnU" secondAttribute="trailing" constant="65" id="owM-EO-BZc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Cg-Wb-hVM" secondAttribute="trailing" constant="11" id="p8d-80-Ncd"/>
                             <constraint firstItem="g9g-JG-oxY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="4" id="poQ-60-O66"/>
+                            <constraint firstItem="Mqm-IW-8Ib" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="478" id="qP7-yW-Ch5"/>
                             <constraint firstItem="fcb-Fo-5z3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="soD-pB-Yha"/>
                             <constraint firstItem="pcc-Mj-nnU" firstAttribute="baseline" secondItem="7Cg-Wb-hVM" secondAttribute="baseline" id="w1T-dv-M3R"/>
                         </constraints>
@@ -72,11 +95,13 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="bestScore" destination="cEC-5z-au9" id="FRg-uh-bQa"/>
+                        <outlet property="bestScoreLabel" destination="Yh8-0n-prT" id="D5t-cc-so3"/>
                         <outlet property="destroyed" destination="fcb-Fo-5z3" id="eh5-bP-nmT"/>
                         <outlet property="hit" destination="Qz2-xE-2Ep" id="Gxq-Lb-qih"/>
                         <outlet property="lvlscore" destination="7Cg-Wb-hVM" id="Dz0-Vc-PWA"/>
                         <outlet property="player" destination="XbU-2Y-G8V" id="az0-2W-h6g"/>
-                        <outlet property="score" destination="EqE-ix-9HV" id="rrh-DN-Noq"/>
+                        <outlet property="score" destination="EqE-ix-9HV" id="hZe-2B-HW4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
